@@ -20,7 +20,7 @@
 
 [트러블 슈팅]
 1) EKS Cluster 구성 순서 (EKS > Addons > NodeGroup) 순으로 구성을 설계하였습니다 (VPC CNI가 NodeGroup보다 우선 생성 필요)
->> CoreDNS 생성 Delay 발생으로 해당 Addons만 NodeGroup 이후 생성되는 부분으로 설계하였습니다.
+→ CoreDNS 생성 Delay 발생으로 해당 Addons만 NodeGroup 이후 생성되는 부분으로 설계하였습니다.
 
 2) alb load balancer controller 등 생성 API를 Kubernetes 내부로 요청하기 위해 EKS VPC 내 Private EC2를 생성해서 Apply 했습니다 (EKS Cluster SG에 EC2 Private IP 443 Port Allow)
 
