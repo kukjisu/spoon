@@ -18,12 +18,12 @@
 - Terraform을 통해 alb-lb-controller를 helm Chart로 구성하였고 Ver(1.9.2), SA, IRSA, Controller 구성파일로 분리하였습니다.
 - Ingress 및 Deployment, SVC도 Terraform으로 구성하였고 Spring Boot Image는 "start.spring.io/starter.zip"을 통해 다운로드 및 구성하고 "mvnw package -DskipTests'로 JAR 빌드, Docker File 생성 후 build 하여 ECR에 업로드하였습니다. Deployment의 Image Tag 및 Affinity 설정으로 특정 Private Node에서 동작할 수 있게 설정하였습니다.
 
-[트러블 슈팅]
+[구성 간 고려사항]
 1) EKS Cluster 구성 순서 (EKS > Addons > NodeGroup) 순으로 구성을 설계하였습니다 (VPC CNI가 NodeGroup보다 우선 생성 필요)
 
 → CoreDNS 생성 Delay 발생으로 해당 Addons만 NodeGroup 이후 생성되는 부분으로 설계하였습니다.
 
-3) alb load balancer controller 등 생성 API를 Kubernetes 내부로 요청하기 위해 EKS VPC 내 Private EC2를 생성해서 Apply 했습니다 (EKS Cluster SG에 EC2 Private IP 443 Port Allow)
+3) alb load balancer controller 등 생성 API를 Kubernetes 내부로 요청하기 위해 EKS VPC 생성 후 같은 VPC내 EC2를 생성해서 Apply 했습니다 (EKS Cluster SG에 EC2 Private IP 443 Port Allow)
 
 
 
